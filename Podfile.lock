@@ -1,4 +1,10 @@
 PODS:
+  - AppAuth (1.6.0):
+    - AppAuth/Core (= 1.6.0)
+    - AppAuth/ExternalUserAgent (= 1.6.0)
+  - AppAuth/Core (1.6.0)
+  - AppAuth/ExternalUserAgent (1.6.0):
+    - AppAuth/Core
   - ARCore/Base (1.33.0):
     - GoogleDataTransport (~> 9.0)
     - nanopb (< 2.30910.0, >= 2.30908.0)
@@ -65,11 +71,13 @@ PODS:
   - PromisesObjC (2.1.1)
 
 DEPENDENCIES:
+  - AppAuth
   - ARCore/CloudAnchors (~> 1.33.0)
   - Firebase/Database (~> 8.0)
 
 SPEC REPOS:
   trunk:
+    - AppAuth
     - ARCore
     - Firebase
     - FirebaseABTesting
@@ -86,6 +94,7 @@ SPEC REPOS:
     - PromisesObjC
 
 SPEC CHECKSUMS:
+  AppAuth: 8fca6b5563a5baef2c04bee27538025e4ceb2add
   ARCore: a5818d47ba3c1a523b4c0bf80ee0a479fb68c5af
   Firebase: 5f8193dff4b5b7c5d5ef72ae54bb76c08e2b841d
   FirebaseABTesting: 10cbce8db9985ae2e3847ea44e9947dd18f94e10
@@ -101,6 +110,6 @@ SPEC CHECKSUMS:
   nanopb: a0ba3315591a9ae0a16a309ee504766e90db0c96
   PromisesObjC: ab77feca74fa2823e7af4249b8326368e61014cb
 
-PODFILE CHECKSUM: e4d781f97a15093251018cbc8909f2d2a1c42c6b
+PODFILE CHECKSUM: 1f9bc4493dc5bc3060e0dccdda7068eb259b602c
 
 COCOAPODS: 1.11.3

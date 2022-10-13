@@ -8,5 +8,6 @@ target 'Hosting' do
   # Pods for Hosting
 	pod 'ARCore/CloudAnchors', '~> 1.33.0'
 	pod 'Firebase/Database', '~> 8.0'
+	#pod 'JSONWebToken'
 
 end
