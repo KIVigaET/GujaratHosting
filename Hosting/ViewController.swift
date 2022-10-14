@@ -35,6 +35,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
     //DATA FOR STORAGE
     //List Of Anchor Data
     var anchorData=[String]()
+    var rawAnchorData=[AnchorEntity]()
     //List Of Buttons for deleting Anchors
     var AnchorButtonList: UIButton!
     
@@ -142,7 +143,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
     }
     
     //Add 3D Model For Reference
-    func add_3d_model(loc:simd_float4x4){
+    func add_3d_model(loc:simd_float4x4,id:String){
         let sphereMesh=MeshResource.generateSphere(radius: 0.1)
         let material=SimpleMaterial(color: .red, isMetallic: true)
         let sphereAnchorObject=ModelEntity(mesh: sphereMesh, materials: [material])
@@ -150,6 +151,8 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
         let sphereAnchor=AnchorEntity(world: SIMD3(x:0, y:0, z:0))
         sphereAnchor.addChild(sphereAnchorObject)
         sphereAnchor.transform=Transform.init(matrix: loc)
+        sphereAnchor.name=id
+        self.rawAnchorData.append(sphereAnchor)
         arView.scene.anchors.append(sphereAnchor)
     }
     
@@ -170,7 +173,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
         self.anchorData.append(anchor.cloudIdentifier!)
         self.noOfAnchorsHosted=self.anchorData.count
         if(self.noOfAnchorsHosted == 5){self.isHosting=false;self.ExportButton.setTitle("Upload", for: .normal)}
-        self.add_3d_model(loc: anchor.transform)
+        self.add_3d_model(loc: anchor.transform,id: anchor.cloudIdentifier!)
         self.setEditAnchorButton()
     }
     
@@ -189,6 +192,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
             //Delete the anchor from the array
             let deleteAction={(action:UIAction) in
                 print(self.anchorData.remove(at: Int(action.title)!))
+                self.arView.scene.removeAnchor(self.rawAnchorData[Int(action.title)!])
                 self.setEditAnchorButton()
             }
             
