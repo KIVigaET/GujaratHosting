@@ -191,8 +191,9 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
             
             //Delete the anchor from the array
             let deleteAction={(action:UIAction) in
-                print(self.anchorData.remove(at: Int(action.title)!))
+                self.anchorData.remove(at: Int(action.title)!)
                 self.arView.scene.removeAnchor(self.rawAnchorData[Int(action.title)!])
+                self.rawAnchorData.remove(at: Int(action.title)!)
                 self.setEditAnchorButton()
             }
             
@@ -201,7 +202,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
             for item in self.anchorData{
                 var action:UIAction
                 if(count == 1){
-                    action=UIAction(title: String(count-1),state: .on ,handler: deleteAction)
+                    action=UIAction(title: String(count-1),handler: deleteAction)
                 }else{
                     action=UIAction(title: String(count-1), handler: deleteAction)
                 }
