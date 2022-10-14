@@ -36,7 +36,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
     //List Of Anchor Data
     var anchorData=[String]()
     //List Of Buttons for deleting Anchors
-    @IBOutlet weak var AnchorButtonList: UIButton!
+    var AnchorButtonList: UIButton!
     
     
     //State Trackers
@@ -99,9 +99,7 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
     func repositionButtons(){
         self.ExportButton.frame=CGRectMake(200, 0, 100, 50)
         self.view.insertSubview(self.ExportButton, at: 9)
-        
-        self.AnchorButtonList.frame=CGRectMake(300, 0, 100, 50)
-        self.view.insertSubview(self.AnchorButtonList, at: 9)
+        self.AnchorButtonList=UIButton(type: .infoDark)
     }
     
     //Init Firebase
@@ -173,29 +171,47 @@ class ViewController: UIViewController, ARSessionDelegate, GARSessionDelegate {
         self.noOfAnchorsHosted=self.anchorData.count
         if(self.noOfAnchorsHosted == 5){self.isHosting=false;self.ExportButton.setTitle("Upload", for: .normal)}
         self.add_3d_model(loc: anchor.transform)
+        self.setEditAnchorButton()
     }
     
     func session(_ session: GARSession, didFailToHost anchor: GARAnchor) {
-        infoLabel.text="FAILED TO HOST...TRY AGAIN"
+        infoLabel.text="FAILED TO HOST.....TRY AGAIN"
     }
     
     //BUTTON FUNCTIONS
     
     //Update Button on Screen based on Anchor List
-    @IBAction func UpdateButtonList(_ sender: Any) {
-            print("KELA")
-            let kela={(action:UIAction) in
-                print(action.title)
+    func setEditAnchorButton(){
+        if(self.anchorData.count > 0){
+            self.AnchorButtonList.frame=CGRectMake(330, 0, 100, 50)
+            self.view.insertSubview(self.AnchorButtonList, at: 9)
+            
+            //Delete the anchor from the array
+            let deleteAction={(action:UIAction) in
+                print(self.anchorData.remove(at: Int(action.title)!))
+                self.setEditAnchorButton()
+            }
+            
+            var items=[UIAction]()
+            var count=1
+            for item in self.anchorData{
+                var action:UIAction
+                if(count == 1){
+                    action=UIAction(title: String(count-1),state: .on ,handler: deleteAction)
+                }else{
+                    action=UIAction(title: String(count-1), handler: deleteAction)
+                }
+                items.append(action)
+                count+=1
             }
         
-            self.AnchorButtonList.menu=UIMenu(children: [
-                UIAction(title: "0",state: .on, handler: kela),
-                UIAction(title: "1", handler: kela),
-            ])
+            self.AnchorButtonList.menu=UIMenu(children: items)
         
             self.AnchorButtonList.showsMenuAsPrimaryAction=true
             self.AnchorButtonList.changesSelectionAsPrimaryAction=true
-        
+        }else{
+            self.AnchorButtonList.removeFromSuperview()
+        }
     }
     
     @IBAction func ExportData(_ sender: Any) {

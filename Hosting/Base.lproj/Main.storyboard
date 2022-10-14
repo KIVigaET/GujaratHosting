@@ -5,7 +5,6 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="21207"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="System colors in document resources" minToolsVersion="11.0"/>
-        <capability name="UIMenu" message="Requires Xcode 11 or later." minToolsVersion="11.0" requiredIntegratedClassName="UICommandDiff"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
@@ -26,32 +25,17 @@
                                     <action selector="ExportData:" destination="BYZ-38-t0r" eventType="touchUpInside" id="fef-Xk-tHc"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" showsMenuAsPrimaryAction="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" changesSelectionAsPrimaryAction="YES" translatesAutoresizingMaskIntoConstraints="NO" id="qV1-Fg-7Dy">
-                                <rect key="frame" x="175" y="457" width="41" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <menu key="menu" id="fXL-DW-bxn">
-                                    <children>
-                                        <command title="Item 1" id="Pty-nB-Gsr"/>
-                                        <command title="Item 2" id="oxf-ss-F67"/>
-                                    </children>
-                                </menu>
-                                <state key="normal" title="Anchors"/>
-                                <connections>
-                                    <action selector="UpdateButtonList:" destination="BYZ-38-t0r" eventType="touchUpInside" id="c8s-uU-jxj"/>
-                                </connections>
-                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                     </view>
                     <connections>
-                        <outlet property="AnchorButtonList" destination="qV1-Fg-7Dy" id="MfJ-oL-eOq"/>
                         <outlet property="ExportButton" destination="dSx-bI-wIw" id="xOY-WX-s5g"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="29" y="4"/>
+            <point key="canvasLocation" x="27.69230769230769" y="3.5545023696682461"/>
         </scene>
     </scenes>
     <resources>
